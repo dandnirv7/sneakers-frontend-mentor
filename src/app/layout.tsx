@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Kumbh_Sans } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar/Navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -12,6 +14,8 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+
+const kumbhSans = Kumbh_Sans({ weight: ["400", "700"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,9 +30,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${kumbhSans.className} antialiased px-36 py-5`}
       >
-        {children}
+        <>
+          <Navbar />
+          {children}
+        </>
       </body>
     </html>
   );
