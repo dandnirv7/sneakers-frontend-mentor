@@ -1,34 +1,33 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  SetStateAction,
+} from "react";
 import { StaticImageData } from "next/image";
-
-import imageProduct1 from "@/assets/images/image-product-1.jpg";
-import imageProduct2 from "@/assets/images/image-product-2.jpg";
-import imageProduct3 from "@/assets/images/image-product-3.jpg";
-import imageProduct4 from "@/assets/images/image-product-4.jpg";
-
-const products = [
-  { id: 1, src: imageProduct1, name: "sneakers-1" },
-  { id: 2, src: imageProduct2, name: "sneakers-2" },
-  { id: 3, src: imageProduct3, name: "sneakers-3" },
-  { id: 4, src: imageProduct4, name: "sneakers-4" },
-];
+import { products } from "@/data/products";
 
 interface ProductContextType {
-  activeProduct: StaticImageData;
-  setActiveProduct: (src: StaticImageData) => void;
-  products: { id: number; src: StaticImageData; name: string }[];
+  activeImageProduct: StaticImageData;
+  setActiveImageProduct: (src: StaticImageData) => void;
+  imageProducts: { id: number; src: StaticImageData; imageName: string }[];
   quantity: number;
+  setQuantity: React.Dispatch<SetStateAction<number>>;
   incrementQuantity: () => void;
   decrementQuantity: () => void;
+  resetQuantity: () => void;
 }
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
 export const ProductProvider = ({ children }: { children: ReactNode }) => {
-  const [activeProduct, setActiveProduct] = useState<StaticImageData>(
-    products[0].src
+  const imageProducts = products[0].imageProducts;
+
+  const [activeImageProduct, setActiveImageProduct] = useState<StaticImageData>(
+    imageProducts[0].src
   );
   const [quantity, setQuantity] = useState<number>(0);
 
@@ -52,15 +51,27 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  const resetQuantity = () => {
+    setQuantity(() => {
+      const newQty = 0;
+      const url = new URL(window.location.href);
+      url.searchParams.set("qty", newQty.toString());
+      window.history.pushState({}, "", url.toString());
+      return newQty;
+    });
+  };
+
   return (
     <ProductContext.Provider
       value={{
-        activeProduct,
-        setActiveProduct,
-        products,
+        activeImageProduct,
+        setActiveImageProduct,
+        imageProducts,
         quantity,
+        setQuantity,
         incrementQuantity,
         decrementQuantity,
+        resetQuantity,
       }}
     >
       {children}

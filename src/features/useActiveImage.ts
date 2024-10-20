@@ -3,26 +3,26 @@ import { StaticImageData } from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-export const useActiveProduct = () => {
+export const useActiveImage = () => {
   const searchParams = useSearchParams();
   const productName = searchParams.get("product") || "sneakers-1";
-  const { setActiveProduct, products } = useProductContext();
+  const { setActiveImageProduct, imageProducts } = useProductContext();
 
-  const changeActiveProduct = (src: StaticImageData, name: string) => {
-    setActiveProduct(src);
+  const changeActiveImage = (src: StaticImageData, name: string) => {
+    setActiveImageProduct(src);
     const url = new URL(window.location.href);
     url.searchParams.set("product", name);
     window.history.pushState({}, "", url.toString());
   };
 
   useEffect(() => {
-    const product = products.find((p) => p.name === productName);
-    if (product) {
-      setActiveProduct(product.src);
+    const imageProduct = imageProducts.find((p) => p.imageName === productName);
+    if (imageProduct) {
+      setActiveImageProduct(imageProduct.src);
     }
-  }, [productName, setActiveProduct, products]);
+  }, [productName, setActiveImageProduct, imageProducts]);
 
   return {
-    changeActiveProduct,
+    changeActiveImage,
   };
 };

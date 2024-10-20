@@ -14,7 +14,7 @@ const QuantityControls: React.FC = () => {
       >
         -
       </button>
-      <span className="text-xl font-semibold">{quantity}</span>
+      <span className="w-6 text-xl font-semibold text-center">{quantity}</span>
       <button
         className="text-2xl font-bold text-orange-500 hover:text-orange-500/75"
         onClick={incrementQuantity}

@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import { Kumbh_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
+import { Toaster } from "@/components/ui/toaster";
+import { ProductProvider } from "@/context/ProductContext";
+import { CartProvider } from "@/context/CartContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,12 +33,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${kumbhSans.className} antialiased px-36 py-5`}
+        className={`${geistSans.variable} ${geistMono.variable} ${kumbhSans.className} antialiased `}
       >
-        <>
-          <Navbar />
-          {children}
-        </>
+        <CartProvider>
+          <ProductProvider>
+            <main className="py-5 px-36">
+              <Navbar />
+              {children}
+            </main>
+            <Toaster />
+          </ProductProvider>
+        </CartProvider>
       </body>
     </html>
   );

@@ -1,35 +1,39 @@
 import React from "react";
 
 import { useProductContext } from "@/context/ProductContext";
-import { useActiveProduct } from "@/features/useActiveProduct";
+import { useActiveImage } from "@/features/useActiveImage";
 import Image from "next/image";
 import EachUtils from "@/components/EachUtils";
 import ProductImage from "./ProductImage";
 
 const SectionProductImage: React.FC = () => {
-  const { activeProduct, products } = useProductContext();
-  const { changeActiveProduct } = useActiveProduct();
+  const { activeImageProduct, imageProducts } = useProductContext();
+  const { changeActiveImage } = useActiveImage();
 
   return (
     <section className="flex flex-col gap-6">
-      <ProductImage activeProduct={activeProduct} />
+      <ProductImage activeProduct={activeImageProduct} />
       <ul className="flex flex-row items-center gap-8 cursor-pointer">
         <EachUtils
-          items={products}
-          render={(product) => (
+          items={imageProducts}
+          render={(imageProduct) => (
             <li
-              key={product.id}
+              key={imageProduct.id}
               className={`rounded-xl ${
-                activeProduct === product.src ? "ring ring-orange-500" : ""
+                activeImageProduct === imageProduct.src
+                  ? "ring ring-orange-500"
+                  : ""
               }`}
-              onClick={() => changeActiveProduct(product.src, product.name)}
+              onClick={() =>
+                changeActiveImage(imageProduct.src, imageProduct.imageName)
+              }
             >
               <Image
-                src={product.src}
+                src={imageProduct.src}
                 alt="Product thumbnail"
                 priority
                 className={`aspect-square rounded-xl ${
-                  activeProduct === product.src
+                  activeImageProduct === imageProduct.src
                     ? "opacity-50"
                     : "opacity-100 hover:opacity-50"
                 }`}
