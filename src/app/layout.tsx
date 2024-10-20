@@ -37,7 +37,7 @@ export default function RootLayout({
       >
         <CartProvider>
           <ProductProvider>
-            <main className="py-5 px-36">
+            <main className="py-0 md:py-5 px-0 md:px-36">
               <Navbar />
               {children}
             </main>

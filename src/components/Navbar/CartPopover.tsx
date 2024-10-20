@@ -49,15 +49,18 @@ const CartPopover: React.FC = () => {
 
   return (
     <Popover>
-      <PopoverTrigger>
-        <BsCart3 className="cursor-pointer size-6" />
+      <PopoverTrigger className="relative">
+        <p className="absolute px-2 text-xs font-semibold text-center text-white bg-orange-500 rounded-full md:text-sm -top-2 -right-2 md:-right-3">
+          {cartItems[0]?.quantity}
+        </p>
+        <BsCart3 className="cursor-pointer size-6 md:size-8" />
       </PopoverTrigger>
-      <PopoverContent className="w-[24rem] mt-5 p-0 shadow-black/30 shadow-xl">
-        <section className="aspect-[16/9] rounded-lg">
+      <PopoverContent className="w-screen md:w-[24rem] mt-5 py-0 shadow-black/30 shadow-xl relative">
+        <section className="aspect-[16/9] rounded-lg top-3 mx-auto absolute md:relative  md:top-auto md:right-auto bg-white w-11/12 md:w-auto ">
           <div className="px-5 py-4 border-b border-grayish-blue">
             <h1 className="font-semibold">Cart</h1>
           </div>
-          <div className="grid flex-col items-center h-full gap-4 p-6 contain">
+          <div className="grid flex-col items-center h-full gap-4 p-6 contain md:w-auto">
             {cartItems.length === 0 ? (
               <h1 className="text-lg font-semibold text-center text-dark-grayish-blue">
                 Your cart is empty
@@ -105,7 +108,7 @@ const CartPopover: React.FC = () => {
                             <AlertDialogTrigger>
                               <FaTrashCan className="size-4 text-dark-grayish-blue" />
                             </AlertDialogTrigger>
-                            <AlertDialogContent>
+                            <AlertDialogContent className="w-11/12 md:w-auto rounded-xl">
                               <AlertDialogHeader>
                                 <AlertDialogTitle>
                                   Are you sure you want to delete this item?
@@ -132,7 +135,7 @@ const CartPopover: React.FC = () => {
                     </div>
                   )}
                 />
-                <button className="w-full px-6 py-4 bg-orange-500 rounded-xl hover:bg-orange-500/75">
+                <button className="w-full px-6 py-4 font-semibold bg-orange-500 rounded-xl hover:bg-orange-500/75">
                   Checkout
                 </button>
               </>

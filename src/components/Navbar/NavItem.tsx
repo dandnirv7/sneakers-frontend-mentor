@@ -12,7 +12,7 @@ const NavItem: React.FC<NavItemProps> = ({ href, children }) => (
   <li className="relative">
     <Link
       href={href}
-      className="after:content-[''] text-dark-grayish-blue hover:text-very-dark-blue after:w-full after:absolute after:-bottom-8 after:left-0 after:hover:border-b-4 after:hover:border-orange-500"
+      className="md:after:content-[''] md:text-dark-grayish-blue hover:text-very-dark-blue md:after:w-full md:after:absolute md:after:-bottom-8 md:after:left-0 md:after:hover:border-b-4 md:after:hover:border-orange-500 font-semibold text-black md:font-normal"
     >
       {children}
     </Link>

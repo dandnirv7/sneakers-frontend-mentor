@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 interface CartItem {
   id: number;
@@ -31,35 +37,42 @@ export const useCartContext = () => {
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [cart, setCart] = useState<CartItem[]>(() => {
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  useEffect(() => {
     const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (item: CartItem) => {
-    const existingProductIndex = cart.findIndex(
-      (cartItem) => cartItem.id === item.id
-    );
-
-    let updatedCart;
-    if (existingProductIndex > -1) {
-      updatedCart = cart.map((cartItem, index) =>
-        index === existingProductIndex
-          ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
-          : cartItem
+    setCart((prevCart) => {
+      const existingProductIndex = prevCart.findIndex(
+        (cartItem) => cartItem.id === item.id
       );
-    } else {
-      updatedCart = [...cart, item];
-    }
 
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+      let updatedCart;
+      if (existingProductIndex > -1) {
+        updatedCart = prevCart.map((cartItem, index) =>
+          index === existingProductIndex
+            ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
+            : cartItem
+        );
+      } else {
+        updatedCart = [...prevCart, item];
+      }
+
+      return updatedCart;
+    });
   };
 
   const removeFromCart = (id: number) => {
-    const updatedCart = cart.filter((item) => item.id !== id);
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
   const clearCart = () => {

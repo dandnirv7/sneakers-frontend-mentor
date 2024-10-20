@@ -11,7 +11,7 @@ const SectionProductImage: React.FC = () => {
   const { changeActiveImage } = useActiveImage();
 
   return (
-    <section className="flex flex-col gap-6">
+    <section className="flex flex-col md:gap-6">
       <ProductImage activeProduct={activeImageProduct} />
       <ul className="flex flex-row items-center gap-8 cursor-pointer">
         <EachUtils
@@ -19,7 +19,7 @@ const SectionProductImage: React.FC = () => {
           render={(imageProduct) => (
             <li
               key={imageProduct.id}
-              className={`rounded-xl ${
+              className={`rounded-xl hidden md:block ${
                 activeImageProduct === imageProduct.src
                   ? "ring ring-orange-500"
                   : ""
