@@ -11,21 +11,21 @@ const SectionProductDetails: React.FC = () => {
   )?.toFixed(2);
 
   return (
-    <section className="flex flex-col gap-6 px-6 py-5 md:p-0 md:w-2/5">
-      <div className="flex flex-col gap-5">
-        <div className="flex flex-col gap-3 md:mb-5">
-          <h3 className="font-semibold uppercase text-dark-grayish-blue">
+    <section className="flex flex-col gap-6 px-6 py-5 md:gap-3 lg:gap-6 md:p-0 ">
+      <div className="flex flex-col gap-5 md:gap-3 lg:gap-5">
+        <div className="flex flex-col gap-3 lg:mb-5">
+          <h3 className="text-sm font-semibold uppercase lg:text-base text-dark-grayish-blue">
             {product.brand}
           </h3>
-          <h1 className="text-3xl font-semibold capitalize md:text-5xl">
+          <h1 className="text-2xl font-semibold capitalize lg:text-5xl">
             {product.productName}
           </h1>
         </div>
-        <p className="text-dark-grayish-blue md:text-lg">
+        <p className="text-xs text-dark-grayish-blue lg:text-lg">
           {product.description}
         </p>
         <div className="flex flex-row items-center justify-between md:items-start md:flex-col md:gap-3">
-          <div className="flex flex-row items-center gap-4">
+          <div className="flex flex-row items-center">
             <div className="flex flex-row items-center justify-center gap-3">
               <h2 className="text-4xl font-semibold md:text-2xl">
                 ${discountedPrice}
@@ -41,7 +41,7 @@ const SectionProductDetails: React.FC = () => {
         </div>
       </div>
 
-      <section className="flex flex-col items-start gap-4 md:flex-row actions">
+      <section className="flex flex-col items-start md:gap-4 lg:flex-row">
         <QuantityControls />
         <AddToCartButton />
       </section>

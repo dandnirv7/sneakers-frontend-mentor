@@ -63,21 +63,19 @@ const Navbar = () => {
         </>
       )}
       <nav className="flex-row items-center justify-between hidden pb-6 border-b border-gray-400 md:flex">
-        <div className="flex items-center justify-center gap-20 focus-within:ouline-none focus-within:ring-0">
+        <div className="flex items-center justify-center lg:gap-20 md:gap-4">
           <Image src={logo} alt="logo" priority />
-          <ul className="flex items-center justify-center w-full gap-10 text-center">
+          <ul className="flex items-center justify-center w-full text-center md:gap-4 lg:gap-10">
             {renderNavItems()}
           </ul>
         </div>
-        <div className="flex flex-row items-center justify-center gap-8">
+        <div className="flex flex-row items-center justify-center md:gap-4 lg:gap-8">
           <CartPopover />
           <Image
             src={avatar}
             alt="avatar"
-            width={64}
-            height={64}
             priority
-            className="rounded-full cursor-pointer hover:ring-2 hover:ring-offset-0 hover:ring-orange-500"
+            className="rounded-full cursor-pointer md:w-12 md:h-12 lg:w-16 lg:h-16 hover:ring-2 hover:ring-offset-0 hover:ring-orange-500"
           />
         </div>
       </nav>

@@ -6,7 +6,7 @@ const QuantityControls: React.FC = () => {
     useProductContext();
 
   return (
-    <div className="flex flex-row items-center justify-between w-full gap-10 px-6 py-4 bg-light-grayish-blue rounded-xl md:w-auto">
+    <div className="flex flex-row items-center justify-between w-full gap-10 px-6 py-4 md:py-3 lg:py-4 bg-light-grayish-blue rounded-xl lg:w-auto ">
       <button
         className="text-4xl font-bold text-orange-500 md:text-2xl hover:text-orange-500/75 focus-within:outline-none focus-within:text-orange-500/75"
         onClick={decrementQuantity}

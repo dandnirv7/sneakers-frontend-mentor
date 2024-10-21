@@ -52,10 +52,12 @@ const AddToCartButton: React.FC = () => {
       <button
         type="submit"
         disabled={quantity === 0}
-        className="flex items-center justify-center w-full gap-4 px-6 py-4 bg-orange-500 shadow-xl rounded-xl hover:bg-orange-500/75 disabled:bg-orange-500/80 shadow-orange-500/25 md:shadow-none focus-within:outline-none focus-within:bg-orange-500/75"
+        className="flex items-center justify-center w-full gap-4 px-6 py-4 bg-orange-500 shadow-xl md:py-3 lg:py-4 rounded-xl hover:bg-orange-500/75 disabled:bg-orange-500/80 shadow-orange-500/25 md:shadow-none focus-within:outline-none focus-within:bg-orange-500/75"
       >
-        <BsCart3 className="size-6" />
-        <span className="text-lg font-semibold">Add to cart</span>
+        <BsCart3 className="md:size-5 size-6 lg:size-6" />
+        <span className="text-lg font-semibold md:text-base lg:text-lg">
+          Add to cart
+        </span>
       </button>
     </form>
   );

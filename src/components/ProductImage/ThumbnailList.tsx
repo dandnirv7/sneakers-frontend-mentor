@@ -4,13 +4,13 @@ import { useThumbnailList } from "@/hooks/useThumbnailList";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-const ThumbanilList: React.FC<{ className?: string }> = ({ className }) => {
+const ThumbnailList: React.FC<{ className?: string }> = ({ className }) => {
   const { activeImageProduct, imageProducts } = useProductContext();
   const { changeActiveImage } = useActiveImage();
   const { setActiveIndex } = useThumbnailList();
 
   return (
-    <ul className="flex flex-row items-center justify-center gap-8  cursor-pointer">
+    <ul className="flex flex-row items-center justify-center cursor-pointer md:gap-5 lg:gap-8">
       {imageProducts.map((imageProduct, index) => (
         <li
           key={imageProduct.id}
@@ -44,4 +44,4 @@ const ThumbanilList: React.FC<{ className?: string }> = ({ className }) => {
   );
 };
 
-export default ThumbanilList;
+export default ThumbnailList;

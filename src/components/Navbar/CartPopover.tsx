@@ -109,13 +109,13 @@ const CartPopover: React.FC = () => {
     <Popover>
       <PopoverTrigger className="relative focus-within:border-0 focus-within:outline-none text-dark-grayish-blue focus-within:text-very-dark-blue hover:text-very-dark-blue">
         {cartItems.length > 0 && (
-          <p className="absolute px-2 text-xs font-semibold text-center text-white bg-orange-500 rounded-full md:text-sm -top-2 -right-2 md:-right-3">
+          <p className="absolute px-2 text-xs font-semibold text-center text-white bg-orange-500 rounded-full lg:text-sm -top-2 -right-2 lg:-right-3">
             {cartItems[0].quantity}
           </p>
         )}
-        <BsCart3 className="cursor-pointer size-6 md:size-8 " />
+        <BsCart3 className="cursor-pointer size-6 lg:size-8" />
       </PopoverTrigger>
-      <PopoverContent className="w-screen md:w-[24rem] mt-5 py-0 shadow-black/30 shadow-xl relative">
+      <PopoverContent className="w-screen md:mr-5 lg:mr-0 md:w-[24rem] mt-5 py-0 shadow-black/30 shadow-xl relative">
         <section className="aspect-[16/9] rounded-lg top-3 mx-auto absolute md:relative md:top-auto bg-white w-11/12 md:w-auto">
           <div className="px-5 py-4 border-b border-grayish-blue">
             <h1 className="font-semibold">Cart</h1>

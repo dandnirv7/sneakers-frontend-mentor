@@ -18,7 +18,7 @@ import { FaX } from "react-icons/fa6";
 
 import { useProductContext } from "@/context/ProductContext";
 import { useThumbnailList } from "@/hooks/useThumbnailList";
-import ThumbanilList from "./ThumbnailList";
+import ThumbnailList from "./ThumbnailList";
 
 const ProductImage: React.FC<{
   activeProduct: string | StaticImageData;
@@ -29,14 +29,12 @@ const ProductImage: React.FC<{
   return (
     <>
       <AlertDialog>
-        <AlertDialogTrigger>
+        <AlertDialogTrigger className="focus-within:outline-orange-500 focus-within:rounded-xl md:w-[320px] md:h-[320px] lg:w-[512px] lg:h-[512px]">
           <Image
             src={activeProduct}
             alt="active product"
             priority
-            className="hidden aspect-square md:rounded-xl md:block"
-            width={512}
-            height={512}
+            className="hidden aspect-square md:rounded-xl md:block w-full h-full md:w-[320px] md:h-[320px] lg:w-[512px] lg:h-[512px]"
           />
         </AlertDialogTrigger>
         <AlertDialogContent className="p-0 bg-transparent border-0 shadow-none outline-none ring-0">
@@ -61,9 +59,9 @@ const ProductImage: React.FC<{
             <CarouselNext className="top-1/2 -right-6" onClick={handleNext} />
           </Carousel>
 
-          <ThumbanilList />
+          <ThumbnailList />
           <AlertDialogFooter className="absolute -right-5 -top-10">
-            <AlertDialogCancel className="text-white bg-transparent border-none hover:bg-transparent hover:border-none hover:text-orange-500">
+            <AlertDialogCancel className="text-white bg-transparent border-none hover:bg-transparent hover:border-none hover:text-orange-500 focus-visible:text-orange-500 focus-visible:ring-0">
               <FaX className="font-bold size-10" />
             </AlertDialogCancel>
           </AlertDialogFooter>

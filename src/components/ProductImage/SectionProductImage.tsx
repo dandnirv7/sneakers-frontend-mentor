@@ -2,15 +2,15 @@ import React from "react";
 
 import { useProductContext } from "@/context/ProductContext";
 import ProductImage from "./ProductImage";
-import ThumbanilList from "./ThumbnailList";
+import ThumbnailList from "./ThumbnailList";
 
 const SectionProductImage: React.FC = () => {
   const { activeImageProduct } = useProductContext();
 
   return (
-    <section className="flex flex-col md:gap-6">
+    <section className="flex flex-col md:gap-3 lg:gap-6">
       <ProductImage activeProduct={activeImageProduct} />
-      <ThumbanilList className="w-[104px] h-[104px]" />
+      <ThumbnailList className="md:w-16 md:h-16 lg:w-[104px] lg:h-[104px]" />
     </section>
   );
 };
