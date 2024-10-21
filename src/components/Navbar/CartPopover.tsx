@@ -13,7 +13,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useCartContext } from "@/context/CartContext";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -47,94 +46,88 @@ const CartPopover: React.FC = () => {
     removeFromCart(id);
   };
 
+  const renderCartItem = (cartItem: CartItem) => (
+    <div
+      key={cartItem.id}
+      className="flex flex-row items-start justify-center gap-4"
+    >
+      <Image
+        src={imageProduct}
+        alt="thumbnail product"
+        priority
+        width={60}
+        height={60}
+        className="rounded-lg aspect-square"
+      />
+      <div className="flex flex-row items-center justify-between gap-5">
+        <div>
+          <h1 className="text-dark-grayish-blue text-[16px]">
+            {cartItem.productName}
+          </h1>
+          <p className="text-dark-grayish-blue">
+            ${cartItem.discountPrice?.toFixed(2) ?? cartItem.price.toFixed(2)} x{" "}
+            {cartItem.quantity}{" "}
+            <span className="font-bold text-black">
+              $
+              {(
+                cartItem.discountPrice ?? cartItem.price * cartItem.quantity
+              ).toFixed(2)}
+            </span>
+          </p>
+        </div>
+        <div>
+          <AlertDialog>
+            <AlertDialogTrigger>
+              <FaTrashCan className="size-4 text-dark-grayish-blue" />
+            </AlertDialogTrigger>
+            <AlertDialogContent className="w-11/12 md:w-auto rounded-xl">
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  Are you sure you want to delete this item?
+                </AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. The item will be permanently
+                  removed from your cart.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={() => handleRemoveFromCart(cartItem.id)}
+                >
+                  Delete
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <Popover>
-      <PopoverTrigger className="relative">
-        <p className="absolute px-2 text-xs font-semibold text-center text-white bg-orange-500 rounded-full md:text-sm -top-2 -right-2 md:-right-3">
-          {cartItems[0]?.quantity}
-        </p>
-        <BsCart3 className="cursor-pointer size-6 md:size-8" />
+      <PopoverTrigger className="relative focus-within:border-0 focus-within:outline-none text-dark-grayish-blue focus-within:text-very-dark-blue hover:text-very-dark-blue">
+        {cartItems.length > 0 && (
+          <p className="absolute px-2 text-xs font-semibold text-center text-white bg-orange-500 rounded-full md:text-sm -top-2 -right-2 md:-right-3">
+            {cartItems[0].quantity}
+          </p>
+        )}
+        <BsCart3 className="cursor-pointer size-6 md:size-8 " />
       </PopoverTrigger>
       <PopoverContent className="w-screen md:w-[24rem] mt-5 py-0 shadow-black/30 shadow-xl relative">
-        <section className="aspect-[16/9] rounded-lg top-3 mx-auto absolute md:relative  md:top-auto md:right-auto bg-white w-11/12 md:w-auto ">
+        <section className="aspect-[16/9] rounded-lg top-3 mx-auto absolute md:relative md:top-auto bg-white w-11/12 md:w-auto">
           <div className="px-5 py-4 border-b border-grayish-blue">
             <h1 className="font-semibold">Cart</h1>
           </div>
-          <div className="grid flex-col items-center h-full gap-4 p-6 contain md:w-auto">
+          <div className="grid flex-col items-center h-full gap-4 p-6 md:w-auto">
             {cartItems.length === 0 ? (
               <h1 className="text-lg font-semibold text-center text-dark-grayish-blue">
                 Your cart is empty
               </h1>
             ) : (
               <>
-                <EachUtils
-                  items={cartItems}
-                  render={(cartItem) => (
-                    <div
-                      key={cartItem.id}
-                      className="flex flex-row items-start justify-center gap-4"
-                    >
-                      <Image
-                        src={imageProduct}
-                        alt="thumbnail product"
-                        priority
-                        width={60}
-                        height={60}
-                        className="rounded-lg aspect-square"
-                      />
-                      <div className="flex flex-row items-center justify-between gap-5">
-                        <div>
-                          <h1 className="text-dark-grayish-blue text-[16px]">
-                            {cartItem.productName}
-                          </h1>
-                          <div>
-                            <p className="text-dark-grayish-blue">
-                              $
-                              {cartItem.discountPrice?.toFixed(2) ??
-                                cartItem.price.toFixed(2)}{" "}
-                              x {cartItem.quantity}{" "}
-                              <span className="font-bold text-black">
-                                $
-                                {(
-                                  (cartItem.discountPrice ?? cartItem.price) *
-                                  cartItem.quantity
-                                ).toFixed(2)}
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                        <div>
-                          <AlertDialog>
-                            <AlertDialogTrigger>
-                              <FaTrashCan className="size-4 text-dark-grayish-blue" />
-                            </AlertDialogTrigger>
-                            <AlertDialogContent className="w-11/12 md:w-auto rounded-xl">
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>
-                                  Are you sure you want to delete this item?
-                                </AlertDialogTitle>
-                                <AlertDialogDescription>
-                                  This action cannot be undone. The item will be
-                                  permanently removed from your cart.
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                <AlertDialogAction
-                                  onClick={() =>
-                                    handleRemoveFromCart(cartItem.id)
-                                  }
-                                >
-                                  Delete
-                                </AlertDialogAction>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
-                          </AlertDialog>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                />
+                <EachUtils items={cartItems} render={renderCartItem} />
                 <button className="w-full px-6 py-4 font-semibold bg-orange-500 rounded-xl hover:bg-orange-500/75">
                   Checkout
                 </button>
@@ -146,4 +139,5 @@ const CartPopover: React.FC = () => {
     </Popover>
   );
 };
+
 export default CartPopover;

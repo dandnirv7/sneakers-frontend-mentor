@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
 import avatar from "@/assets/images/image-avatar.png";
 import logo from "@/assets/images/logo.svg";
 import { FaBars, FaX } from "react-icons/fa6";
@@ -20,9 +19,7 @@ const Navbar = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,11 +29,15 @@ const Navbar = () => {
     };
 
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const renderNavItems = () =>
+    navItems.map((item) => (
+      <NavItem key={item.label} href={item.href}>
+        {item.label}
+      </NavItem>
+    ));
 
   return (
     <>
@@ -56,27 +57,19 @@ const Navbar = () => {
                 onClick={toggleMenu}
                 className="font-semibold cursor-pointer size-4 text-dark-grayish-blue"
               />
-              {navItems.map((item) => (
-                <NavItem key={item.label} href={item.href}>
-                  {item.label}
-                </NavItem>
-              ))}
+              {renderNavItems()}
             </ul>
           </div>
         </>
       )}
       <nav className="flex-row items-center justify-between hidden pb-6 border-b border-gray-400 md:flex">
-        <section className="flex items-center justify-center gap-20">
+        <div className="flex items-center justify-center gap-20 focus-within:ouline-none focus-within:ring-0">
           <Image src={logo} alt="logo" priority />
           <ul className="flex items-center justify-center w-full gap-10 text-center">
-            {navItems.map((item) => (
-              <NavItem key={item.label} href={item.href}>
-                {item.label}
-              </NavItem>
-            ))}
+            {renderNavItems()}
           </ul>
-        </section>
-        <section className="flex flex-row items-center justify-center gap-8">
+        </div>
+        <div className="flex flex-row items-center justify-center gap-8">
           <CartPopover />
           <Image
             src={avatar}
@@ -86,18 +79,18 @@ const Navbar = () => {
             priority
             className="rounded-full cursor-pointer hover:ring-2 hover:ring-offset-0 hover:ring-orange-500"
           />
-        </section>
+        </div>
       </nav>
-      <nav className="flex flex-row items-center justify-between p-5 md:hidden ">
-        <section className="flex flex-row items-center justify-center gap-4">
+      <nav className="flex flex-row items-center justify-between p-5 md:hidden">
+        <div className="flex flex-row items-center justify-center gap-4">
           {isMenuOpen ? (
             <FaX onClick={toggleMenu} className="cursor-pointer size-5" />
           ) : (
             <FaBars onClick={toggleMenu} className="cursor-pointer size-5" />
           )}
           <Image src={logo} alt="logo" priority />
-        </section>
-        <section className="flex flex-row items-center justify-center gap-4">
+        </div>
+        <div className="flex flex-row items-center justify-center gap-4">
           <CartPopover />
           <Image
             src={avatar}
@@ -107,7 +100,7 @@ const Navbar = () => {
             priority
             className="rounded-full cursor-pointer hover:ring-2 hover:ring-offset-0 hover:ring-orange-500"
           />
-        </section>
+        </div>
       </nav>
     </>
   );

@@ -3,8 +3,12 @@ import { calculateDiscount } from "@/lib/utils";
 import AddToCartButton from "./AddToCartButton";
 import QuantityControls from "./QuantityControls";
 
-const SectionProductDetails = () => {
+const SectionProductDetails: React.FC = () => {
   const product = products[0];
+  const discountedPrice = calculateDiscount(
+    product.originalPrice,
+    product.discount
+  )?.toFixed(2);
 
   return (
     <section className="flex flex-col gap-6 px-6 py-5 md:p-0 md:w-2/5">
@@ -24,11 +28,7 @@ const SectionProductDetails = () => {
           <div className="flex flex-row items-center gap-4">
             <div className="flex flex-row items-center justify-center gap-3">
               <h2 className="text-4xl font-semibold md:text-2xl">
-                $
-                {calculateDiscount(
-                  product.originalPrice,
-                  product.discount
-                )?.toFixed(2)}
+                ${discountedPrice}
               </h2>
               <span className="block px-2 py-.5 font-semibold text-white rounded-md md:text-base text-lg bg-very-dark-blue w-max">
                 {product.discount}%

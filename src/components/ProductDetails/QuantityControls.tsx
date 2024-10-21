@@ -8,7 +8,7 @@ const QuantityControls: React.FC = () => {
   return (
     <div className="flex flex-row items-center justify-between w-full gap-10 px-6 py-4 bg-light-grayish-blue rounded-xl md:w-auto">
       <button
-        className="text-4xl font-bold text-orange-500 md:text-2xl hover:text-orange-500/75"
+        className="text-4xl font-bold text-orange-500 md:text-2xl hover:text-orange-500/75 focus-within:outline-none focus-within:text-orange-500/75"
         onClick={decrementQuantity}
         disabled={quantity === 0}
       >
@@ -16,7 +16,7 @@ const QuantityControls: React.FC = () => {
       </button>
       <span className="w-6 text-xl font-semibold text-center">{quantity}</span>
       <button
-        className="text-4xl font-bold text-orange-500 md:text-2xl hover:text-orange-500/75"
+        className="text-4xl font-bold text-orange-500 md:text-2xl hover:text-orange-500/75 focus-within:outline-none focus-within:text-orange-500/75"
         onClick={incrementQuantity}
         disabled={quantity === 99}
       >

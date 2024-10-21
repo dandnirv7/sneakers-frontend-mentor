@@ -17,11 +17,11 @@ interface CartItem {
 import { useCartContext } from "@/context/CartContext";
 
 const AddToCartButton: React.FC = () => {
+  const { toast } = useToast();
   const { quantity, resetQuantity } = useProductContext();
-  const product = products[0];
   const { addToCart } = useCartContext();
 
-  const { toast } = useToast();
+  const product = products[0];
 
   const handleAddToCart = (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,7 +52,7 @@ const AddToCartButton: React.FC = () => {
       <button
         type="submit"
         disabled={quantity === 0}
-        className="flex items-center justify-center w-full gap-4 px-6 py-4 bg-orange-500 shadow-xl rounded-xl hover:bg-orange-500/75 disabled:bg-orange-500/80 shadow-orange-500/25 md:shadow-none"
+        className="flex items-center justify-center w-full gap-4 px-6 py-4 bg-orange-500 shadow-xl rounded-xl hover:bg-orange-500/75 disabled:bg-orange-500/80 shadow-orange-500/25 md:shadow-none focus-within:outline-none focus-within:bg-orange-500/75"
       >
         <BsCart3 className="size-6" />
         <span className="text-lg font-semibold">Add to cart</span>
